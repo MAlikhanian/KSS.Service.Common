@@ -1,0 +1,47 @@
+dotnet build
+dotnet run
+
+# Step 1: Login to Docker registry
+docker login docker-hosted.sebaoffice.ir
+
+# Step 2: Build the Docker image
+docker build -t docker-hosted.sebaoffice.ir/kss-common-service:latest .
+
+# Alternative: Build and push in one command (if using buildx)
+docker buildx build --push -t docker-hosted.sebaoffice.ir/kss-common-service:latest .
+
+# Step 3: Push the image to registry
+docker push docker-hosted.sebaoffice.ir/kss-common-service:latest
+
+# Step 4: Create namespace (if it doesn't exist)
+kubectl create namespace kss-common-service
+
+# Step 5: Apply deployment
+kubectl apply -f deployment.yaml
+
+# Step 6: Restart rollout (after pushing new image)
+kubectl rollout restart deployment/kss-common-service -n kss-common-service
+
+# Create Docker registry secret (one-time)
+
+kubectl create secret docker-registry docker-secret \
+  --docker-server=docker-hosted.sebaoffice.ir \
+  --docker-username=YOUR_USERNAME \
+  --docker-password=YOUR_PASSWORD \
+  --namespace kss-common-service
+
+# Useful commands
+kubectl get pods -n kss-common-service
+kubectl get secrets -n kss-common-service
+kubectl get pvc -n kss-common-service
+kubectl get configmaps -n kss-common-service
+kubectl get ingress -n kss-common-service
+kubectl get jobs -n kss-common-service
+kubectl get cronjobs -n kss-common-service
+kubectl get svc -n kss-common-service
+kubectl get certificate -n kss-common-service
+kubectl get sts -n kss-common-service
+kubectl get networkpolicy -n kss-common-service
+
+kubectl delete networkpolicy kss-common-service-network-policy -n kss-common-service
+kubectl delete secrets docker-secret -n kss-common-service
