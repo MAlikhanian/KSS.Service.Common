@@ -98,7 +98,7 @@ CREATE TABLE dbo.[Region] (
     Code      VARCHAR(3)   NOT NULL,                -- کد استان/منطقه
     CONSTRAINT PK_Region PRIMARY KEY CLUSTERED (Id),
     CONSTRAINT FK_Region_Country FOREIGN KEY (CountryId) REFERENCES dbo.[Country] (Id) ON DELETE NO ACTION,
-    CONSTRAINT UQ_Region_Country_Code UNIQUE (CountryId, Code)
+    CONSTRAINT UQ_Region_CountryCode UNIQUE (CountryId, Code)
 );
 CREATE NONCLUSTERED INDEX IX_Region_CountryId ON dbo.[Region] (CountryId);
 GO
