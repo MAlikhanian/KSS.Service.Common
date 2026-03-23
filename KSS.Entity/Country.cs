@@ -21,6 +21,8 @@ namespace KSS.Entity
 
         public short? CallingCode { get; set; }
 
+        public byte PostalCodeLength { get; set; }
+
         public ICollection<CountryTranslation> Translations { get; set; } = new List<CountryTranslation>();
         public ICollection<Region> Regions { get; set; } = new List<Region>();
     }

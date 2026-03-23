@@ -7,6 +7,7 @@ namespace KSS.Dto
         public string Code3 { get; set; } = string.Empty;
         public string? NativeName { get; set; }
         public short? CallingCode { get; set; }
+        public byte PostalCodeLength { get; set; }
     }
 
     public class CountryTranslationDto
@@ -24,5 +25,6 @@ namespace KSS.Dto
         public string Name { get; set; } = string.Empty;
         public string? NativeName { get; set; }
         public short? CallingCode { get; set; }
+        public byte PostalCodeLength { get; set; }
     }
 }

@@ -66,11 +66,12 @@ GO
 -- SECTION 2: Country + CountryTranslation
 -- ============================================================
 CREATE TABLE dbo.[Country] (
-    Id          SMALLINT      IDENTITY(1, 1) NOT NULL, -- شناسه
-    Code        NVARCHAR(2)   NOT NULL,                -- ISO 3166-1 alpha-2 (e.g. IR, US)
-    Code3       NVARCHAR(3)   NOT NULL,                -- ISO 3166-1 alpha-3 (e.g. IRN, USA)
-    NativeName  NVARCHAR(80)  NULL,                    -- نام بومی
-    CallingCode SMALLINT      NULL,                    -- پیش‌شماره تلفن (e.g. 98, 1)
+    Id               SMALLINT      IDENTITY(1, 1) NOT NULL, -- شناسه
+    Code             NVARCHAR(2)   NOT NULL,                -- ISO 3166-1 alpha-2 (e.g. IR, US)
+    Code3            NVARCHAR(3)   NOT NULL,                -- ISO 3166-1 alpha-3 (e.g. IRN, USA)
+    NativeName       NVARCHAR(80)  NULL,                    -- نام بومی
+    CallingCode      SMALLINT      NULL,                    -- پیش‌شماره تلفن (e.g. 98, 1)
+    PostalCodeLength TINYINT       NOT NULL,                -- تعداد کاراکتر کد پستی (e.g. 10 for IR, 5 for US)
     CONSTRAINT PK_Country PRIMARY KEY CLUSTERED (Id),
     CONSTRAINT UQ_Country_Code UNIQUE (Code),
     CONSTRAINT UQ_Country_Code3 UNIQUE (Code3)
@@ -176,8 +177,8 @@ BEGIN
 
     -- Country
     SET IDENTITY_INSERT dbo.[Country] ON;
-    INSERT INTO dbo.[Country] (Id, Code, Code3, NativeName, CallingCode)
-    SELECT Id, Code, Code3, NativeName, CallingCode
+    INSERT INTO dbo.[Country] (Id, Code, Code3, NativeName, CallingCode, PostalCodeLength)
+    SELECT Id, Code, Code3, NativeName, CallingCode, PostalCodeLength
     FROM KSS_Common_Prod.dbo.[Country];
     SET IDENTITY_INSERT dbo.[Country] OFF;
 
