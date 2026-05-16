@@ -22,6 +22,14 @@ namespace KSS.Api.MappingProfile
             // City
             CreateMap<City, CityDto>().ReverseMap();
             CreateMap<CityTranslation, CityTranslationDto>().ReverseMap();
+
+            // Module
+            CreateMap<Module, ModuleDto>().ReverseMap();
+            CreateMap<ModuleTranslation, ModuleTranslationDto>().ReverseMap();
+
+            // Resource
+            CreateMap<Resource, ResourceDto>().ReverseMap();
+            CreateMap<ResourceTranslation, ResourceTranslationDto>().ReverseMap();
         }
     }
 }

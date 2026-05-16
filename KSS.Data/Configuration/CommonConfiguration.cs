@@ -53,4 +53,37 @@ namespace KSS.Data.Configuration
             b.HasKey(x => new { x.CityId, x.LanguageId });
         }
     }
+
+    public class ModuleConfiguration : IEntityTypeConfiguration<Module>
+    {
+        public void Configure(EntityTypeBuilder<Module> b)
+        {
+            b.HasMany(x => x.Translations).WithOne(x => x.Module).HasForeignKey(x => x.ModuleId).OnDelete(DeleteBehavior.Cascade);
+            b.HasMany(x => x.Resources).WithOne(x => x.Module).HasForeignKey(x => x.ModuleId).OnDelete(DeleteBehavior.Cascade);
+        }
+    }
+
+    public class ModuleTranslationConfiguration : IEntityTypeConfiguration<ModuleTranslation>
+    {
+        public void Configure(EntityTypeBuilder<ModuleTranslation> b)
+        {
+            b.HasKey(x => new { x.ModuleId, x.LanguageId });
+        }
+    }
+
+    public class ResourceConfiguration : IEntityTypeConfiguration<Resource>
+    {
+        public void Configure(EntityTypeBuilder<Resource> b)
+        {
+            b.HasMany(x => x.Translations).WithOne(x => x.Resource).HasForeignKey(x => x.ResourceId).OnDelete(DeleteBehavior.Cascade);
+        }
+    }
+
+    public class ResourceTranslationConfiguration : IEntityTypeConfiguration<ResourceTranslation>
+    {
+        public void Configure(EntityTypeBuilder<ResourceTranslation> b)
+        {
+            b.HasKey(x => new { x.ResourceId, x.LanguageId });
+        }
+    }
 }

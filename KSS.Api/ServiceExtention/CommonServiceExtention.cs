@@ -37,6 +37,18 @@ namespace KSS.Api.ServiceExtention
             services.AddScoped<ICityTranslationRepository, CityTranslationRepository>();
             services.AddScoped<ICityTranslationService, CityTranslationService>();
 
+            // Module
+            services.AddScoped<IModuleRepository, ModuleRepository>();
+            services.AddScoped<IModuleService, ModuleService>();
+            services.AddScoped<IModuleTranslationRepository, ModuleTranslationRepository>();
+            services.AddScoped<IModuleTranslationService, ModuleTranslationService>();
+
+            // Resource
+            services.AddScoped<IResourceRepository, ResourceRepository>();
+            services.AddScoped<IResourceService, ResourceService>();
+            services.AddScoped<IResourceTranslationRepository, ResourceTranslationRepository>();
+            services.AddScoped<IResourceTranslationService, ResourceTranslationService>();
+
             return services;
         }
     }
