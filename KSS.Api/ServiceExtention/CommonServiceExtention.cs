@@ -37,6 +37,16 @@ namespace KSS.Api.ServiceExtention
             services.AddScoped<ICityTranslationRepository, CityTranslationRepository>();
             services.AddScoped<ICityTranslationService, CityTranslationService>();
 
+            // Address / Phone labels (shared lookups)
+            services.AddScoped<IAddressLabelRepository, AddressLabelRepository>();
+            services.AddScoped<IAddressLabelService, AddressLabelService>();
+            services.AddScoped<IAddressLabelTranslationRepository, AddressLabelTranslationRepository>();
+            services.AddScoped<IAddressLabelTranslationService, AddressLabelTranslationService>();
+            services.AddScoped<IPhoneLabelRepository, PhoneLabelRepository>();
+            services.AddScoped<IPhoneLabelService, PhoneLabelService>();
+            services.AddScoped<IPhoneLabelTranslationRepository, PhoneLabelTranslationRepository>();
+            services.AddScoped<IPhoneLabelTranslationService, PhoneLabelTranslationService>();
+
             // Module
             services.AddScoped<IModuleRepository, ModuleRepository>();
             services.AddScoped<IModuleService, ModuleService>();

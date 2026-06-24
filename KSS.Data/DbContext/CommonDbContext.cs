@@ -16,6 +16,12 @@ namespace KSS.Data.DbContexts
         public DbSet<City> Cities { get; set; }
         public DbSet<CityTranslation> CityTranslations { get; set; }
 
+        // Shared address / phone labels
+        public DbSet<AddressLabel> AddressLabels { get; set; }
+        public DbSet<AddressLabelTranslation> AddressLabelTranslations { get; set; }
+        public DbSet<PhoneLabel> PhoneLabels { get; set; }
+        public DbSet<PhoneLabelTranslation> PhoneLabelTranslations { get; set; }
+
         // Authorization (Module / Resource)
         public DbSet<Module> Modules { get; set; }
         public DbSet<ModuleTranslation> ModuleTranslations { get; set; }

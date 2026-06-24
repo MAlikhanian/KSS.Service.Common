@@ -23,6 +23,12 @@ namespace KSS.Api.MappingProfile
             CreateMap<City, CityDto>().ReverseMap();
             CreateMap<CityTranslation, CityTranslationDto>().ReverseMap();
 
+            // Address / Phone labels
+            CreateMap<AddressLabel, AddressLabelDto>().ReverseMap();
+            CreateMap<AddressLabelTranslation, AddressLabelTranslationDto>().ReverseMap();
+            CreateMap<PhoneLabel, PhoneLabelDto>().ReverseMap();
+            CreateMap<PhoneLabelTranslation, PhoneLabelTranslationDto>().ReverseMap();
+
             // Module
             CreateMap<Module, ModuleDto>().ReverseMap();
             CreateMap<ModuleTranslation, ModuleTranslationDto>().ReverseMap();
