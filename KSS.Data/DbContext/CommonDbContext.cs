@@ -27,5 +27,8 @@ namespace KSS.Data.DbContexts
         public DbSet<ModuleTranslation> ModuleTranslations { get; set; }
         public DbSet<Resource> Resources { get; set; }
         public DbSet<ResourceTranslation> ResourceTranslations { get; set; }
+
+        // Terms acceptance (shared across applications)
+        public DbSet<TermsAcceptance> TermsAcceptances { get; set; }
     }
 }

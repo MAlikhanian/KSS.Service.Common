@@ -76,3 +76,11 @@ Thumbs.db
 # Windows Form project (not needed for API)
 KSS.WindowsForm/
 
+
+# Settings files: configuration and secrets come from the environment and Kubernetes Secrets,
+# never from a file baked into the image.
+**/appsettings.json
+**/appsettings.*.json
+
+# Test projects are not part of the image.
+KSS.Api.Tests/

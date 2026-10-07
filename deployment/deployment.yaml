@@ -11,7 +11,8 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxUnavailable: 1
+      # Keep the running pod until the new one is Ready (one replica, so maxSurge brings it up first).
+      maxUnavailable: 0
       maxSurge: 1
   selector:
     matchLabels:
@@ -43,6 +44,30 @@ spec:
           value: "Information"
         - name: Logging__LogLevel__Microsoft.AspNetCore
           value: "Warning"
+        # Secrets come from Kubernetes Secrets in this namespace; nothing secret is baked into the image.
+        - name: ConnectionStrings__DefaultConnection
+          valueFrom:
+            secretKeyRef:
+              name: common-service-db-connection
+              key: connectionString
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: common-service-jwt
+              key: jwtSecret
+        # Values the image no longer carries in a settings file.
+        - name: PORT
+          value: "8000"
+        - name: ALLOWED_ORIGINS
+          value: "http://localhost:3000,https://erp.seba.ir,https://members.sebaoffice.ir,https://common.api.sebaoffice.ir"
+        - name: Authentication__Type
+          value: "JwtBearer"
+        # Current terms version per application. Enable it together with that application's terms text:
+        # until the two agree, the application shows the form and accepts are refused. While absent, the
+        # application is not enabled (its requests return 404). A value must be 1-32 characters with no
+        # surrounding whitespace, or the service refuses to start.
+        # - name: Terms__CurrentVersion__customerrisk
+        #   value: "<the CRS zone's terms version constant>"
         resources:
           requests:
             memory: "256Mi"

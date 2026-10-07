@@ -31,6 +31,11 @@ RUN dotnet build -c Release -o /app/build --no-restore
 # Publish the application
 RUN dotnet publish -c Release -o /app/publish --no-restore
 
+# Refuse to produce an image that carries a settings file: configuration and secrets come from the
+# environment and Kubernetes Secrets. A second line of defence behind .dockerignore.
+RUN leaked="$(find /app/publish -type f -iname 'appsettings*.json')"; \
+    if [ -n "$leaked" ]; then echo "REFUSED: settings file(s) in the publish output:" >&2; echo "$leaked" >&2; exit 1; fi
+
 # Use the .NET 10.0 ASP.NET runtime image for running
 # TEMP-NEXUS-BYPASS: original line below, restore once Nexus DNS is fixed
 # FROM docker.sebaoffice.ir/dotnet/aspnet:10.0 AS runtime
