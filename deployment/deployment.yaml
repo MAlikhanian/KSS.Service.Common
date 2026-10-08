@@ -66,8 +66,8 @@ spec:
         # until the two agree, the application shows the form and accepts are refused. While absent, the
         # application is not enabled (its requests return 404). A value must be 1-32 characters with no
         # surrounding whitespace, or the service refuses to start.
-        # - name: Terms__CurrentVersion__customerrisk
-        #   value: "<the CRS zone's terms version constant>"
+        - name: Terms__CurrentVersion__customerrisk
+          value: "2026-09-30"
         resources:
           requests:
             memory: "256Mi"
